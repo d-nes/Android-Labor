@@ -6,6 +6,10 @@ plugins {
 android {
     compileSdk 32
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "hu.bme.aut.android.tictactoe"
         minSdk 21
