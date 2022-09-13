@@ -32,6 +32,21 @@ class TicTacToeView : View {
 
         drawGameArea(canvas)
         drawPlayers(canvas)
+        checkStatus(canvas)
+    }
+
+    private fun checkStatus(canvas: Canvas) {
+        //check rows
+        for(i in 1..3){
+            if(TicTacToeModel.getFieldContent(i,1) > 0) {
+                val player = TicTacToeModel.getFieldContent(i, 1)
+                if(TicTacToeModel.getFieldContent(i ,2) == player){
+                    if(TicTacToeModel.getFieldContent(i ,3) == player){
+
+                    }
+                }
+            }
+        }
     }
 
     private fun drawGameArea(canvas: Canvas) {
@@ -111,5 +126,13 @@ class TicTacToeView : View {
             else -> return super.onTouchEvent(event)
         }
     }
+
+    interface GameCompletedHandler {
+        fun gameCompleted(status: String)
+    }
+
+    var gameCompletedHandler: GameCompletedHandler? = null
+
+    fun setOnGameCompleted
     
 }
