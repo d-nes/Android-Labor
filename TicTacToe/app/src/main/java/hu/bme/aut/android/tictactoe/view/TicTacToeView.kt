@@ -47,6 +47,26 @@ class TicTacToeView : View {
                 }
             }
         }
+        //check columns
+        for(i in 1..3){
+            if(TicTacToeModel.getFieldContent(1,i) > 0) {
+                val player = TicTacToeModel.getFieldContent(1, i)
+                if(TicTacToeModel.getFieldContent(2 ,i) == player){
+                    if(TicTacToeModel.getFieldContent(3 ,i) == player){
+
+                    }
+                }
+            }
+        }
+        //check diagonals
+        if(TicTacToeModel.getFieldContent(1,1) == TicTacToeModel.getFieldContent(2,2) && TicTacToeModel.getFieldContent(1,1) == TicTacToeModel.getFieldContent(3,3)){
+
+        }
+        if(TicTacToeModel.getFieldContent(3,1) == TicTacToeModel.getFieldContent(2,2) && TicTacToeModel.getFieldContent(3,1) == TicTacToeModel.getFieldContent(1,3)){
+
+        }
+        //check if filled with no winner
+
     }
 
     private fun drawGameArea(canvas: Canvas) {
@@ -133,6 +153,6 @@ class TicTacToeView : View {
 
     var gameCompletedHandler: GameCompletedHandler? = null
 
-    fun setOnGameCompleted
+    //fun setOnGameCompleted
     
 }
