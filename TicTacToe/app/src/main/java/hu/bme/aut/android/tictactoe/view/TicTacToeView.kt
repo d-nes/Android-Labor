@@ -115,8 +115,8 @@ class TicTacToeView : View {
 
                 if(TicTacToeModel.checkStatus()){
                     Toast.makeText(this.context, "Game over", Toast.LENGTH_LONG).show()
-                    //val intent = Intent(this.context, MainActivity::class.java)
-                    //this.context.startActivity(intent)
+                    val intent = Intent(this.context, MainActivity::class.java)
+                    this.context.startActivity(intent)
                 }
 
                 return true
