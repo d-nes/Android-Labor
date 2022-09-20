@@ -60,6 +60,31 @@
             android:text="Nem"/>
 
         <!-- Ide jön egy egyszeres kiválasztás nézet -->
+        <hu.bme.aut.android.viewlabor.view.ChoiceLayout
+            android:id="@+id/clFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:multiple="1"
+            app:dividerType="simple_divider">
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Férfi" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nő" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Egyéb" />
+        </hu.bme.aut.android.viewlabor.view.ChoiceLayout>
 
         <TextView
             style="@style/Subtitle"
@@ -68,6 +93,50 @@
             android:text="Válassz max 3-at"/>
 
         <!-- Ide jön egy többszörös kiválasztás nézet -->
+        <hu.bme.aut.android.viewlabor.view.ChoiceLayout
+            android:id="@+id/clSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:multiple="3"
+            app:dividerType="double_divider">
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akármi1" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akármi2" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akármi3" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akármi4" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akármi5" />
+
+            <TextView
+                style="@style/ChoiceOptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Akármi6" />
+
+        </hu.bme.aut.android.viewlabor.view.ChoiceLayout>
 
 
         <TextView
@@ -77,6 +146,51 @@
             android:text="Válassz egy színt"/>
 
         <!-- Ide jön egy színválasztó nézet -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Árnyalat" />
+
+        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
+            android:id="@+id/hueSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hslColoringMode="output"
+            app:hslMode="hue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telítettség" />
+
+        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
+            android:id="@+id/saturationSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hslColoringMode="output"
+            app:hslMode="saturation" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fényerő" />
+
+        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
+            android:id="@+id/lightnessSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hslColoringMode="output"
+            app:hslMode="lightness" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Átlátszóság" />
+
+        <codes.side.andcolorpicker.alpha.HSLAlphaColorPickerSeekBar
+            android:id="@+id/alphaSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
