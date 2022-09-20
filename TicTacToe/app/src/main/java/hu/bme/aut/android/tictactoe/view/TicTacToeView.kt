@@ -40,52 +40,6 @@ class TicTacToeView : View {
         drawPlayers(canvas)
     }
 
-    private fun checkStatus() : Boolean {
-        var isOver = false
-
-        for(i in 1..3){
-            if(TicTacToeModel.getFieldContent(i,1) > 0) {
-                val player = TicTacToeModel.getFieldContent(i, 1)
-                if(TicTacToeModel.getFieldContent(i ,2) == player){
-                    if(TicTacToeModel.getFieldContent(i ,3) == player){
-                        isOver = true
-                    }
-                }
-            }
-        }
-        //check columns
-        for(i in 1..3){
-            if(TicTacToeModel.getFieldContent(1,i) > 0) {
-                val player = TicTacToeModel.getFieldContent(1, i)
-                if(TicTacToeModel.getFieldContent(2 ,i) == player){
-                    if(TicTacToeModel.getFieldContent(3 ,i) == player){
-                        isOver = true
-                    }
-                }
-            }
-        }
-        //check diagonals
-        if(TicTacToeModel.getFieldContent(1,1) == TicTacToeModel.getFieldContent(2,2) && TicTacToeModel.getFieldContent(1,1) == TicTacToeModel.getFieldContent(3,3)){
-            isOver = true
-        }
-        if(TicTacToeModel.getFieldContent(3,1) == TicTacToeModel.getFieldContent(2,2) && TicTacToeModel.getFieldContent(3,1) == TicTacToeModel.getFieldContent(1,3)){
-            isOver = true
-        }
-        //check if filled with no winner
-        var empty = false;
-        for(i in 1..3){
-            for(j in 1..3){
-                if (TicTacToeModel.getFieldContent(i, j) == EMPTY){
-                    empty = true
-                }
-            }
-        }
-        if(!empty) {
-            isOver = true
-        }
-        return isOver
-    }
-
     private fun drawGameArea(canvas: Canvas) {
         val widthFloat: Float = width.toFloat()
         val heightFloat: Float = height.toFloat()
@@ -159,8 +113,8 @@ class TicTacToeView : View {
                     invalidate()
                 }
 
-                if(checkStatus()){
-                    Toast.makeText(this.context, "Game over", Toast.LENGTH_LONG)
+                if(TicTacToeModel.checkStatus()){
+                    Toast.makeText(this.context, "Game over", Toast.LENGTH_LONG).show()
                     val intent = Intent(this.context, MainActivity::class.java)
                     this.context.startActivity(intent)
                 }

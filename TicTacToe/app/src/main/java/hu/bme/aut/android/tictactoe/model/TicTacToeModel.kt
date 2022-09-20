@@ -1,5 +1,8 @@
 package hu.bme.aut.android.tictactoe.model
 
+import android.util.Log
+import java.sql.Types.NULL
+
 object TicTacToeModel {
 
     const val EMPTY: Byte = 0
@@ -37,6 +40,65 @@ object TicTacToeModel {
         changeNextPlayer()
         model[x][y] = content
         return content
+    }
+
+    fun checkStatus() : Boolean {
+        //Log.d("checkStatus()","call")
+
+        //check rows
+        for(i in 0..2){
+            //Log.d("checkStatus()", "$i row")
+            var player = getFieldContent(0, i)
+            if(player != EMPTY){
+                //Log.d("checkStatus()", "not empty: $player")
+                if(getFieldContent(1, i) == player && getFieldContent(2, i) == player){
+                    Log.i("checkStatus()", "row wins")
+                    return true;
+                }
+            }
+        }
+
+        //check columns
+        for(i in 0..2){
+            //Log.d("checkStatus()", "$i column")
+            var player = getFieldContent(i, 0)
+            if(player != EMPTY){
+                //Log.d("checkStatus()", "not empty: $player")
+                if(getFieldContent(i, 1) == player && getFieldContent(i, 2) == player){
+                    Log.i("checkStatus()", "column wins")
+                    return true;
+                }
+            }
+        }
+
+        //check diagonals
+        var player = getFieldContent(0,0)
+        if(player != EMPTY && getFieldContent(1,1) == player && getFieldContent(2,2) == player){
+            Log.i("checkStatus()", "diagonal 1 wins")
+            return true
+        }
+        player = getFieldContent(2,0)
+        if(player != EMPTY && getFieldContent(1,1) == player && getFieldContent(0,2) == player){
+            Log.i("checkStatus()", "diagonal 2 wins")
+            return true
+        }
+
+
+        //check even
+        for(x in 0..2){
+            for(y in 0..2){
+                if(getFieldContent(x, y) == EMPTY){
+                    return false
+                }
+                else if(x == 2 && y == 2){
+                    Log.i("checkStatus()", "even")
+                    return true
+                }
+            }
+        }
+
+
+        return false
     }
 
 }
