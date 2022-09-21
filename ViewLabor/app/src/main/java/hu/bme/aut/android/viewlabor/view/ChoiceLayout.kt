@@ -77,16 +77,19 @@ class ChoiceLayout : LinearLayout {
         return selectedCount
     }
 
+    var selected = listOf<View>()
+
     private fun refreshAfterAdd(child: View) {
         child.isClickable = true
         child.setOnClickListener { view ->
             if(getSelectedCount() == 3){
-                val v = getChildAt(0) //TODO figure out
-                v.isSelected = false
+                selected.first().isSelected = false
+                selected -= selected.first()
             }
             if (multiple > 1) {
                 if (view.isSelected || getSelectedCount() < multiple) {
                     view.isSelected = !view.isSelected
+                    selected += view
                 }
             } else {
                 for (i in 0 until childCount) {
