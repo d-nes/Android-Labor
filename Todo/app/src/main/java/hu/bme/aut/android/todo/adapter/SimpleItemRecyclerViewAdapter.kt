@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.todo.R
 import hu.bme.aut.android.todo.databinding.RowTodoBinding
 import hu.bme.aut.android.todo.model.Todo
+import java.lang.Math.random
 
 class SimpleItemRecyclerViewAdapter : ListAdapter<Todo, SimpleItemRecyclerViewAdapter.ViewHolder>(itemCallback) {
 
@@ -85,7 +86,7 @@ class SimpleItemRecyclerViewAdapter : ListAdapter<Todo, SimpleItemRecyclerViewAd
         fun onItemLongClick(position: Int, view:    View): Boolean
     }
 
-
+    //TODO figure out
     public fun shuffled(){
         Log.i("Adapter", "shuffled")
         todoList.shuffled()
