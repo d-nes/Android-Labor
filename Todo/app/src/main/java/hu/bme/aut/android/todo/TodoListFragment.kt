@@ -43,10 +43,6 @@ class TodoListFragment : Fragment(), TodoCreateFragment.TodoCreatedListener, Sim
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        _binding = FragmentTodoListBinding.inflate(inflater, container, false)
-        return binding.root
-
         setHasOptionsMenu(true)
 
         _binding = FragmentTodoListBinding.inflate(inflater, container, false)

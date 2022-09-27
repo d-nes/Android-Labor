@@ -3,14 +3,28 @@ package hu.bme.aut.android.todo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.todo.R
 import hu.bme.aut.android.todo.databinding.RowTodoBinding
 import hu.bme.aut.android.todo.model.Todo
 
-class SimpleItemRecyclerViewAdapter : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+class SimpleItemRecyclerViewAdapter : ListAdapter<Todo, SimpleItemRecyclerViewAdapter.ViewHolder>(itemCallback) {
 
-    private val todoList = mutableListOf<Todo>()
+    companion object{
+        object itemCallback : DiffUtil.ItemCallback<Todo>(){
+            override fun areItemsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
+    private var todoList = emptyList<Todo>()
 
     var itemClickListener: TodoItemClickListener? = null
 
@@ -35,23 +49,19 @@ class SimpleItemRecyclerViewAdapter : RecyclerView.Adapter<SimpleItemRecyclerVie
     }
 
     fun addItem(todo: Todo) {
-        val size = todoList.size
-        todoList.add(todo)
-        notifyItemInserted(size)
+        todoList += todo
+        submitList(todoList)
     }
 
     fun addAll(todos: List<Todo>) {
-        val size = todoList.size
         todoList += todos
-        notifyItemRangeInserted(size, todos.size)
+        submitList(todoList)
     }
 
     fun deleteRow(position: Int) {
-        todoList.removeAt(position)
-        notifyItemRemoved(position)
+        todoList = todoList.filterIndexed { index, _ -> index != position }
+        submitList(todoList)
     }
-
-    override fun getItemCount() = todoList.size
 
     inner class ViewHolder(val binding: RowTodoBinding) : RecyclerView.ViewHolder(binding.root) {
         var todo: Todo? = null
@@ -70,6 +80,6 @@ class SimpleItemRecyclerViewAdapter : RecyclerView.Adapter<SimpleItemRecyclerVie
 
     interface TodoItemClickListener {
         fun onItemClick(todo: Todo)
-        fun onItemLongClick(position: Int, view: View): Boolean
+        fun onItemLongClick(position: Int, view:    View): Boolean
     }
 }
