@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package hu.bme.aut.android.todo
 
 import android.content.ClipData

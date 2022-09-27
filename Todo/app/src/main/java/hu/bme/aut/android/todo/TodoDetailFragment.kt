@@ -43,7 +43,7 @@ class TodoDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.todoDetail.text = selectedTodo?.description
+        binding.tvTodoDetail?.text = selectedTodo?.description
     }
 
 }
