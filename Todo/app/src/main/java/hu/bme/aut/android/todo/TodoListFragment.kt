@@ -57,7 +57,6 @@ class TodoListFragment : Fragment(), TodoCreateFragment.TodoCreatedListener, Sim
         // layout configuration (layout, layout-land)
         itemDetailFragmentContainer = view.findViewById(R.id.todo_detail_nav_container)
 
-
         /** Click Listener to trigger navigation based on if you have
          * a single pane layout or two pane layout
          */
@@ -75,6 +74,10 @@ class TodoListFragment : Fragment(), TodoCreateFragment.TodoCreatedListener, Sim
         simpleItemRecyclerViewAdapter.addAll(demoData)
         binding.root.findViewById<RecyclerView>(R.id.todo_list).adapter =
             simpleItemRecyclerViewAdapter
+
+        binding.fab?.setOnClickListener {
+            simpleItemRecyclerViewAdapter.shuffled()
+        }
     }
 
     override fun onItemClick(todo: Todo) {
@@ -120,8 +123,5 @@ class TodoListFragment : Fragment(), TodoCreateFragment.TodoCreatedListener, Sim
     override fun onTodoCreated(todo: Todo) {
         simpleItemRecyclerViewAdapter.addItem(todo)
     }
-
-
-
 
 }

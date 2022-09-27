@@ -1,8 +1,10 @@
 package hu.bme.aut.android.todo.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -81,5 +83,11 @@ class SimpleItemRecyclerViewAdapter : ListAdapter<Todo, SimpleItemRecyclerViewAd
     interface TodoItemClickListener {
         fun onItemClick(todo: Todo)
         fun onItemLongClick(position: Int, view:    View): Boolean
+    }
+
+
+    public fun shuffled(){
+        Log.i("Adapter", "shuffled")
+        todoList.shuffled()
     }
 }

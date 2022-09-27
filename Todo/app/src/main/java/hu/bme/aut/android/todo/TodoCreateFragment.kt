@@ -11,7 +11,7 @@ import hu.bme.aut.android.todo.databinding.FragmentCreateBinding
 import hu.bme.aut.android.todo.model.Todo
 import kotlin.random.Random
 
-class TodoCreateFragment : DialogFragment() {
+class TodoCreateFragment : DialogFragment(), DatePickerDialogFragment.DateListener  {
 
     private lateinit var listener: TodoCreatedListener
     private lateinit var binding: FragmentCreateBinding
@@ -68,10 +68,19 @@ class TodoCreateFragment : DialogFragment() {
             dismiss()
         }
 
+        binding.tvTodoDueDate.setOnClickListener {
+            showDatePickerDialog()
+        }
     }
 
     private fun showDatePickerDialog() {
-        //TODO
+        val datePicker = DatePickerDialogFragment()
+        datePicker.setTargetFragment(this, 0)
+        fragmentManager?.let { datePicker.show(it, DatePickerDialogFragment.TAG) }
+    }
+
+    override fun onDateSelected(date: String) {
+        binding.tvTodoDueDate.text = date
     }
 
     interface TodoCreatedListener {

@@ -1,16 +1,17 @@
 package hu.bme.aut.android.todo
 
-import android.content.ClipData
+import android.R
 import android.os.Bundle
-import android.view.DragEvent
-import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import hu.bme.aut.android.todo.adapter.SimpleItemRecyclerViewAdapter
 import hu.bme.aut.android.todo.databinding.FragmentTodoDetailBinding
 import hu.bme.aut.android.todo.model.Todo
+
 
 class TodoDetailFragment : Fragment() {
 
