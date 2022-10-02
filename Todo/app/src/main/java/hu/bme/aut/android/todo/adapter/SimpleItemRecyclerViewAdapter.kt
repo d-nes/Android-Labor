@@ -89,6 +89,6 @@ class SimpleItemRecyclerViewAdapter : ListAdapter<Todo, SimpleItemRecyclerViewAd
     //TODO figure out
     public fun shuffled(){
         Log.i("Adapter", "shuffled")
-        todoList.shuffled()
+        todoList.shuffled() //Nem működik? Miért nem? Újra kéne rajzolni??
     }
 }
