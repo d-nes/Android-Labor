@@ -11,4 +11,6 @@
     <string name="sms">SMS</string>
     <string name="permission_denied_call">Call permission denied</string>
     <string name="call_permission_explanation">The application needs permission to make phone calls. It will not initiate calls without explicit user intention.</string>
+    <string name="permission_denied_sms">Message permission denied</string>
+    <string name="sms_permission_explanation">The application needs permission to send messages. It will not send the message without explicit user intention.</string>
 </resources>
