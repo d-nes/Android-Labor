@@ -18,7 +18,7 @@ class ContactsAdapter : ListAdapter<Contact, ContactsAdapter.ContactViewHolder>(
     var itemClickListener: ContactItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ContactViewHolder(ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ContactViewHolder(ItemContactBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
