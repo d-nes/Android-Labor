@@ -11,12 +11,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import hu.bme.aut.android.todo.adapter.SimpleItemRecyclerViewAdapter
 import hu.bme.aut.android.todo.databinding.ActivityTodoListBinding
 import hu.bme.aut.android.todo.model.Todo
+import hu.bme.aut.android.todo.viewmodel.TodoViewModel
 
 class TodoListActivity : AppCompatActivity(), TodoCreateFragment.TodoCreatedListener, SimpleItemRecyclerViewAdapter.TodoItemClickListener {
     private lateinit var simpleItemRecyclerViewAdapter: SimpleItemRecyclerViewAdapter
+    private lateinit var todoViewModel: TodoViewModel
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -46,17 +49,16 @@ class TodoListActivity : AppCompatActivity(), TodoCreateFragment.TodoCreatedList
         }
 
         setupRecyclerView()
+
+        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        todoViewModel.allTodos.observe(this) { todos ->
+            simpleItemRecyclerViewAdapter.submitList(todos)
+        }
     }
 
     private fun setupRecyclerView() {
-        val demoData = mutableListOf(
-            Todo(1, "title1", Todo.Priority.LOW, "2011. 09. 26.", "description1"),
-            Todo(2, "title2", Todo.Priority.MEDIUM, "2011. 09. 27.", "description2"),
-            Todo(3, "title3", Todo.Priority.HIGH, "2011. 09. 28.", "description3")
-        )
         simpleItemRecyclerViewAdapter = SimpleItemRecyclerViewAdapter()
         simpleItemRecyclerViewAdapter.itemClickListener = this
-        simpleItemRecyclerViewAdapter.addAll(demoData)
         binding.root.findViewById<RecyclerView>(R.id.todo_list).adapter = simpleItemRecyclerViewAdapter
     }
 
@@ -74,12 +76,15 @@ class TodoListActivity : AppCompatActivity(), TodoCreateFragment.TodoCreatedList
         }
     }
 
-    override fun onItemLongClick(position: Int, view: View): Boolean {
+    override fun onItemLongClick(position: Int, view: View, todo: Todo): Boolean {
         val popup = PopupMenu(this, view)
         popup.inflate(R.menu.menu_todo)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.delete -> simpleItemRecyclerViewAdapter.deleteRow(position)
+                R.id.delete -> {
+                    todoViewModel.delete(todo)
+                    return@setOnMenuItemClickListener true
+                }
             }
             false
         }
@@ -101,6 +106,6 @@ class TodoListActivity : AppCompatActivity(), TodoCreateFragment.TodoCreatedList
     }
 
     override fun onTodoCreated(todo: Todo) {
-        simpleItemRecyclerViewAdapter.addItem(todo)
+        todoViewModel.insert(todo)
     }
 }
