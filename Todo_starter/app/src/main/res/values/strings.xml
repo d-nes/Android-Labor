@@ -3,6 +3,7 @@
     <string name="title_todo_list">Todos</string>
     <string name="title_todo_detail">Todo Detail</string>
     <string name="itemCreateTodo">Create</string>
+    <string name="itemDeleteAllTodo">Delete all</string>
     <string name="lblTodoTitle">Todo label</string>
     <string name="lblTodoPriority">Priority</string>
     <string name="lblTodoDueDate">Due date</string>

@@ -101,6 +101,10 @@ class TodoListActivity : AppCompatActivity(), TodoCreateFragment.TodoCreatedList
         if (item.itemId == R.id.itemCreateTodo) {
             val todoCreateFragment = TodoCreateFragment()
             todoCreateFragment.show(supportFragmentManager, "TAG")
+        } else if (item.itemId == R.id.itemDeleteAllTodo){
+            for(t in todoViewModel.allTodos.value!!.toList()){
+                todoViewModel.delete(t)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
