@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.ktx.firestore
@@ -65,6 +66,15 @@ class PostsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
+            }
+            R.id.nav_error -> throw RuntimeException("Test crash")
+            R.id.nav_analytics -> {
+                val bundle = Bundle()
+                bundle.putString("demo_key", "idabc")
+                bundle.putString("data_key", "mydata")
+
+                FirebaseAnalytics.getInstance(this)
+                    .logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
             }
         }
 
