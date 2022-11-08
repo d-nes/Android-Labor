@@ -2,6 +2,7 @@ package hu.bme.aut.android.labyrinth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import hu.bme.aut.android.labyrinth.databinding.ActivityMainBinding
 import hu.bme.aut.android.labyrinth.events.MoveUserResponseEvent
 import hu.bme.aut.android.labyrinth.events.WriteMessageResponseEvent
@@ -9,6 +10,7 @@ import hu.bme.aut.android.labyrinth.network.LabyrinthAPI
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,9 +32,13 @@ class MainActivity : AppCompatActivity() {
         labyrinthAPI = LabyrinthAPI()
 
         binding.btnDown.setOnClickListener {
+           var duration
             coroutine {
-                labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_DOWN)
+                duration = measureTimeMillis {
+                    labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_DOWN)
+                }
             }
+            Toast.makeText(this, duration.toString(), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnUp.setOnClickListener {
