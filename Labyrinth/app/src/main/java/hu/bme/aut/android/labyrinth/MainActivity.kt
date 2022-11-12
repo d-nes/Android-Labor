@@ -1,15 +1,12 @@
 package hu.bme.aut.android.labyrinth
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import hu.bme.aut.android.labyrinth.databinding.ActivityMainBinding
-import hu.bme.aut.android.labyrinth.events.MoveUserResponseEvent
-import hu.bme.aut.android.labyrinth.events.WriteMessageResponseEvent
 import hu.bme.aut.android.labyrinth.network.LabyrinthAPI
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
@@ -31,37 +28,70 @@ class MainActivity : AppCompatActivity() {
 
         labyrinthAPI = LabyrinthAPI()
 
+        var responseTime : Long = 0
+        var networkState : Boolean = false
         binding.btnDown.setOnClickListener {
-           var duration
             coroutine {
-                duration = measureTimeMillis {
+                networkState = netWorkState()
+                responseTime = measureTimeMillis {
                     labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_DOWN)
                 }
             }
-            Toast.makeText(this, duration.toString(), Toast.LENGTH_SHORT).show()
+            if(!networkState)
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, responseTime.toString(), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnUp.setOnClickListener {
             coroutine {
-               labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_UP)
+                networkState = netWorkState()
+                responseTime = measureTimeMillis {
+                    labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_UP)
+                }
             }
+            if(!networkState)
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, responseTime.toString(), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnLeft.setOnClickListener {
             coroutine {
-                labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_LEFT)
+                networkState = netWorkState()
+                responseTime = measureTimeMillis {
+                    labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_LEFT)
+                }
             }
+            if(!networkState)
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, responseTime.toString(), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnRight.setOnClickListener {
             coroutine {
-                labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_RIGHT)
+                networkState = netWorkState()
+                responseTime = measureTimeMillis {
+                    labyrinthAPI.moveUser(binding.etUsername.text.toString(), MOVE_RIGHT)
+                }
             }
+            if(!networkState)
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, responseTime.toString(), Toast.LENGTH_SHORT).show()
         }
         binding.btnSend.setOnClickListener {
             coroutine {
-                labyrinthAPI.writeMessage(binding.etUsername.text.toString(), binding.etMessage.text.toString())
+                networkState = netWorkState()
+                responseTime = measureTimeMillis {
+                    labyrinthAPI.writeMessage(binding.etUsername.text.toString(), binding.etMessage.text.toString())
+                }
             }
+            if(!networkState)
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, responseTime.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -71,4 +101,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun coroutine(call: () -> Unit) = Thread { call() }.start()
 
+    private fun netWorkState() : Boolean{
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
 }
